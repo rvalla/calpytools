@@ -18,7 +18,7 @@ class PCS():
 		if not ordinal == None:
 			z_pair = self.set_data[cardinality-1][ordinal-1][0]
 			states = self.set_data[cardinality-1][ordinal-1][1]
-		return self.build_set_info_msg(cardinality, ordinal, interval, is_inverted, z_pair, states, ordered_form, prime_form)
+		return cardinality, ordinal, interval, is_inverted, z_pair, states, ordered_form, prime_form
 	
 	def search_set(self, cardinality, is_inverted, prime_form):
 		found = False
