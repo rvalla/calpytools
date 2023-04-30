@@ -3,9 +3,10 @@ import random as rd
 class Chain():
 	"A tool to create a constant pitch class set note sequence"
 
-	def __init__(self, pcs, string_notes, link_min, link_max):
+	def __init__(self, pcs, string_notes, link_min, link_max, max_degrading):
 		self.pcs = pcs #sometimes we need to analyze pitch class sets...
 		self.degrading = 0 #to know how many times we add links trivially...
+		self.max_degrading = max_degrading - 1 #to stop after a number of fallbacks...
 		self.base_data = self.get_base_data(string_notes)
 		self.base = self.base_data["ordered"]
 		self.i_base = self.pcs.invert_set(len(self.base), self.base)
@@ -33,7 +34,7 @@ class Chain():
 			self.sequence_size += 1
 			if self.check_if_closed() and self.sequence_size >= self.link_min:
 				self.building = False
-			elif self.degrading > 2 or self.sequence_size >= self.link_max:
+			elif self.degrading > self.max_degrading or self.sequence_size >= self.link_max:
 				self.building = False
 		self.check_sequence_status()
 	

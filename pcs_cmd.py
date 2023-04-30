@@ -3,6 +3,9 @@ from pcs import PCS
 
 #A simple script to analyze pitch class sets from the terminal
 tool = PCS() #We initialize PCS() class here...
+print("\n---- c a l  p y  t o o l s", end="\n")
+print("---- musicaltools.gitlab.io", end="\n")
+print("---- PCS() command line utility", end="\n\n")
 print("Do you want to run PCS() in debug mode? If so type 'yes'.", end="\n")
 
 a = input()
@@ -90,6 +93,6 @@ while True:
         elif a.lower() == "forte":
             iterate_database() #To run an analysis of all prime forms in the database...
         else:
-            get_set_info(debug, a)
+            get_set_info(debug, a) #To print input classification...
     except:
         print("I don't know how to process that input...", end="\n\n")

@@ -22,6 +22,7 @@ class PCS():
 		return cardinality, ordinal, interval, is_inverted, z_pair, states, ordered_form, prime_form
 	
 	def get_set_ordinal(self, notes):
+		#sometimes we only need to know the ordinal of a set...
 		cardinality = len(notes)
 		prime_form = self.prime_form(notes)
 		is_inverted, ordinal = self.search_set(cardinality, False, prime_form)
