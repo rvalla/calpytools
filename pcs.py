@@ -21,6 +21,12 @@ class PCS():
 			states = self.set_data[cardinality-1][ordinal-1][1]
 		return cardinality, ordinal, interval, is_inverted, z_pair, states, ordered_form, prime_form
 	
+	def get_set_ordinal(self, notes):
+		cardinality = len(notes)
+		prime_form = self.prime_form(notes)
+		is_inverted, ordinal = self.search_set(cardinality, False, prime_form)
+		return ordinal
+	
 	def search_set(self, cardinality, is_inverted, prime_form):
 		found = False
 		ordinal = None #if the set is not in the database we will return None
@@ -109,13 +115,13 @@ class PCS():
 		return new_notes
 	
 	def invert_set(self, cardinality, notes):
-		new_notes = []
+		new_notes = [] #sometimes we need to invert the set...
 		for i in range(cardinality):
 			new_notes.append(12-notes[i]%12)
 		return new_notes
 
 	def interval_vector(self, notes):
-		vector = [0,0,0,0,0,0]
+		vector = [0,0,0,0,0,0] #ready to build the interval vector...
 		step = 0
 		for i in range(len(notes)-1):
 			for n in range(step + 1, len(notes)):
@@ -130,7 +136,7 @@ class PCS():
 		return vector
 	
 	def big_interval_vector(self, notes):
-		vector = [0,0,0,0,0,0,0,0,0,0,0]
+		vector = [0,0,0,0,0,0,0,0,0,0,0] #ready to build a big interval vector (11 interval classes)...
 		step = 0
 		for i in range(len(notes)-1):
 			for n in range(step + 1, len(notes)):
@@ -142,31 +148,32 @@ class PCS():
 		return vector
 	
 	def move_set(self, notes, interval):
-		new_notes = []
+		new_notes = [] #ready to return a trasposition of a set...
 		for n in notes:
 			new_notes.append((n+interval)%12)
 		return new_notes
 
 	def string_to_notes(self, string_notes):
-		notes = []
+		notes = [] #converting string "0 1 2 3" to list [0,1,2,3]...
 		for n in string_notes.split(" "):
 			notes.append(int(n))
 		return notes
 	
 	def notes_to_string(self, notes):
-		m = "("
+		m = "(" #formating ordered and prime forms...
 		for n in notes:
 			m += str(n)
 			m += " "
 		return m[0:len(m)-1] + ")"
 	
 	def vector_to_string(self, vector):
-		m = "["
+		m = "[" #formating interval vector...
 		for v in vector:
 			m += str(v)
 		return m +"]"
 
 	def load_prime_forms(self):
+		#here we load prime forms and set's data from .txt database...
 		prime_forms = [[] for i in range(12)]
 		set_data = [[] for i in range(12)]
 		data = open("data/forte_prime_forms.csv").readlines()[1:]
@@ -177,6 +184,7 @@ class PCS():
 		return prime_forms, set_data
 	
 	def build_set_info_msg(self, cardinality, ordinal, interval, is_inverted, z_pair, states, ordered_form, prime_form):
+		#formating set info to print in console...
 		m = str(cardinality) + "."
 		if z_pair != -1:
 			m += "Z"
