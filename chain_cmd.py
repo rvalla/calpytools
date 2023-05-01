@@ -66,10 +66,13 @@ print("Type 'q' when you are ready!", end="\n\n")
 
 def get_pcs_chain(debug, string_notes, attempts, link_min, link_max, degrading):
     print("\nYou ask for a sequence based on " + string_notes + ".", "\n")
+    ch = Chain(pcs_tool, string_notes, link_min, link_max, degrading) #Creating the Chain() instance...
     if debug:
+        print("I am working with this candidates matrix:", end="\n\n")
+        print(ch.candidates_to_string())
         for i in range(attempts):
-            print("Attempt: " + str(i+1), end="\n")
-            ch = Chain(pcs_tool, string_notes, link_min, link_max, degrading) #Creating the Chain() instance...
+            ch.run()
+            print("\nAttempt: " + str(i+1), end="\n")
             print("Degrading: " + str(ch.degrading), end="\n")
             print("Is this sequence healthy?: " + str(ch.check_sequence(ch.base, ch.sequence)), end="\n") #Checking the sequence created...
             print("Is this sequence closed?: " + str(ch.is_closed), end="\n") #Printing sequence status...
@@ -77,8 +80,8 @@ def get_pcs_chain(debug, string_notes, attempts, link_min, link_max, degrading):
             print("Here is the sequence: " + ch.sequence_to_string(ch.sequence), end="\n\n") #Printing the sequence...
     else:
         for i in range(attempts):
+            ch.run()
             print("Attempt: " + str(i+1), end="\n")
-            ch = Chain(pcs_tool, string_notes, link_min, link_max, degrading) #Creating the Chain() instance...
             print(ch.sequence_to_string(ch.sequence), end="\n\n") #Printing the sequence...
 
 while True:
