@@ -1,18 +1,17 @@
 from music21 import *
-import json as js
 import random as rd
-from scores import m21Score
+from score import m21Score
 from matrix import Matrix
 
 class Texture(m21Score):
 	"A machine to make a musical texture using a matrix"
 
-	#Building an instance of a Texture..
-	def __init__(self, title, composer, key, t_sig, parts, matrix, cycles, mode, t_unit, t_measure, offs, v_offs):
-		m21Score.__init__(self, title, composer, key, t_sig, parts)
+	#building an instance of a Texture..
+	def __init__(self, title, composer, key, t_sig, matrix, cycles, mode, t_unit, t_measure, offs, v_offs):
+		m21Score.__init__(self, title, composer, key, t_sig, len(matrix.data))
 		self.matrix = matrix
-		self.cycles = cycles #Number of cycles
-		self.mode = mode #Texture mode: puntual, filled, mobile
+		self.cycles = cycles #number of cycles
+		self.mode = mode #texture mode: puntual, filled, mobile
 		self.t_unit = t_unit
 		self.t_measure = t_measure
 		self.t_set = int(self.t_measure / self.t_unit)
@@ -20,12 +19,12 @@ class Texture(m21Score):
 		self.voice_offset = v_offs
 		self.build_texture()
 
-	#Building initial texture...
+	#building initial texture...
 	def build_texture(self):
 		for i in range(self.cycles):
 			self.add_cycle()
 
-	#Adding a texture cycle based on matrix...
+	#adding a texture cycle based on matrix...
 	def add_cycle(self):
 		if self.mode == "puntual":
 			self.add_puntual_matrix()
@@ -42,7 +41,7 @@ class Texture(m21Score):
 			for c in range(w):
 				self.parts[r].append(self.puntual_measure(self.matrix.get_cell(r, c), r))
 
-	#Creating a puntual texture measure...
+	#creating a puntual texture measure...
 	def puntual_measure(self, cell, part):
 		measure = []
 		c = len(cell)
@@ -62,7 +61,7 @@ class Texture(m21Score):
 			measure.append(self.create_note(-1, self.t_measure))
 		return measure
 
-	#Functions to create filled texture...
+	#functions to create filled texture...
 	def add_filled_matrix(self):
 		h = self.matrix.h
 		w = self.matrix.w
@@ -70,7 +69,7 @@ class Texture(m21Score):
 			for c in range(w):
 				self.parts[r].append(self.filled_measure(self.matrix.get_cell(r, c), r))
 
-	#Creating a filled texture measure...
+	#creating a filled texture measure...
 	def filled_measure(self, cell, part):
 		measure = []
 		c = len(cell)
@@ -87,7 +86,7 @@ class Texture(m21Score):
 			measure.append(self.create_note(-1, self.t_measure))
 		return measure
 
-	#Functions to create mobile texture...
+	#functions to create mobile texture...
 	def add_mobile_matrix(self):
 		h = self.matrix.h
 		w = self.matrix.w
@@ -95,7 +94,7 @@ class Texture(m21Score):
 			for c in range(w):
 				self.parts[r].append(self.mobile_measure(self.matrix.get_cell(r, c), r))
 
-	#Creating a mobile texture measure...
+	#creating a mobile texture measure...
 	def mobile_measure(self, cell, part):
 		measure = []
 		c = len(cell)
@@ -107,7 +106,7 @@ class Texture(m21Score):
 			measure.append(self.create_note(-1, self.t_measure))
 		return measure
 
-	#Printing texture information...
+	#printing texture information...
 	def __str__(self):
 		return "-- Hi, I am a Texture made with a matrix" + "\n" \
 				+ "-- I have " + str(len(self.parts)) + " parts" + "\n" \

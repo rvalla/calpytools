@@ -80,6 +80,11 @@ class Matrix():
 		for n in notes:
 			new_notes.append((n+t)%self.mod)
 		return new_notes
+	
+	#setting up matrix size...
+	def set_size(self, w, h):
+		self.h = h
+		self.w = w
 
 	#function to get information in a cell...
 	def get_cell(self, r, c):
@@ -87,8 +92,23 @@ class Matrix():
 		return self.data[self.r_status[r]][self.c_status[c]]
 
 	#function to set a matrix cell...
-	def set_cell(cell, position, notes):
+	def set_cell(self, position, string_notes):
+		notes = self.get_notes(string_notes)
 		self.data[position[0]][position[1]] = notes
+		if self.max_in_cell < len(notes):
+			self.max_in_cell = len(notes)
+
+	#function to create an empty matrix...
+	def empty_matrix(self, width, height):
+		self.set_size(width, height)
+		self.max_in_cell = 0
+		self.data = []
+		for r in range(self.h):
+			row = []
+			for c in range(self.w):
+				row.append([])
+			self.data.append(row)
+		self.build_status()
 
 	#function to create a type 1 matrix...
 	def build_type_one(self, notes):
@@ -96,8 +116,7 @@ class Matrix():
 
 	#function to create a type 2 matrix...
 	def build_type_two(self, notes, other_notes):
-		self.w = len(notes)
-		self.h = len(other_notes)
+		self.set_size(len(notes), len(other_notes))
 		self.max_in_cell = 1
 		self.data = []
 		for o in other_notes:
@@ -111,8 +130,7 @@ class Matrix():
 	def trasposition_cycle(self, string_row, t):
 		size = self.trasposition_cycle_size(t)
 		first_row = self.get_first_cycle_row(string_row, size)
-		self.w = size
-		self.h = size
+		self.set_size(size, size)
 		self.max_in_cell = 1
 		self.data = [first_row]
 		for h in range(1, size):
@@ -153,11 +171,6 @@ class Matrix():
 			if (n%b == 0):
 				break #We save the minumun which is b multiple too...
 		return n
-
-	#setting up matrix size...
-	def set_size(self, w, h):
-		self.h = h
-		self.w = w
 
 	#printing matrix information...
 	def __str__(self):

@@ -6,7 +6,7 @@ class Melody(m21Score):
 	"A machine to make a musical melody from a structured notes sequence"
 
 	#building an instance of a Melody..
-	def __init__(self, title, composer, key, t_sig, parts, chain, cycles, mode, t_unit, t_measure, offs):
+	def __init__(self, title, composer, key, t_sig, chain, cycles, mode, t_unit, t_measure, offs):
 		m21Score.__init__(self, title, composer, key, t_sig, 1)
 		self.ch = chain
 		self.cycles = cycles #number of cycles...
@@ -33,12 +33,12 @@ class Melody(m21Score):
 
 	#functions to create puntual melody...
 	def add_puntual_chain(self):
-		w = self.ch.size
+		w = self.ch.sequence_size
 		for c in range(w):
-			self.parts[r].append(self.puntual_measure(self.ch.sequence[c]))
+			self.parts[0].append(self.puntual_measure(self.ch.sequence[c]))
 
 	#creating a puntual texture measure...
-	def puntual_measure(self, cell, part):
+	def puntual_measure(self, cell):
 		measure = []
 		c = len(cell)
 		if c > 0:
@@ -47,7 +47,7 @@ class Melody(m21Score):
 			cp = 0
 			for i in range(self.t_set):
 				if ps[cp] == i:
-					pitch = cell[cp] + self.midi_offset + self.voice_offset * part
+					pitch = cell[cp] + self.midi_offset
 					measure.append(self.create_note(pitch, self.t_unit))
 					if cp < c - 1:
 						cp += 1
@@ -59,12 +59,12 @@ class Melody(m21Score):
 
 	#functions to create filled texture...
 	def add_filled_chain(self):
-		w = self.ch.size
+		w = self.ch.sequence_size
 		for c in range(w):
-			self.parts[r].append(self.filled_measure(self.ch.sequence[c]))
+			self.parts[0].append(self.filled_measure(self.ch.sequence[c]))
 
 	#creating a filled texture measure...
-	def filled_measure(self, cell, part):
+	def filled_measure(self, cell):
 		measure = []
 		c = len(cell)
 		if c > 0:
@@ -74,7 +74,7 @@ class Melody(m21Score):
 			ps.append(self.t_set)
 			for i in range(c):
 				duration = self.t_unit * (ps[i+1] - ps[i])
-				pitch = cell[i] + self.midi_offset + self.voice_offset * part
+				pitch = cell[i] + self.midi_offset
 				measure.append(self.create_note(pitch, duration))
 		else:
 			measure.append(self.create_note(-1, self.t_measure))
@@ -82,17 +82,17 @@ class Melody(m21Score):
 
 	#functions to create mobile texture...
 	def add_mobile_chain(self):
-		w = self.ch.size
+		w = self.ch.sequence_size
 		for c in range(w):
-			self.parts[r].append(self.mobile_measure(self.ch.sequence[c]))
+			self.parts[0].append(self.mobile_measure(self.ch.sequence[c]))
 
 	#creating a mobile texture measure...
-	def mobile_measure(self, cell, part):
+	def mobile_measure(self, cell):
 		measure = []
 		c = len(cell)
 		if c > 0:
 			for i in range(self.t_set):
-				pitch = cell[i%c] + self.midi_offset + self.voice_offset * part
+				pitch = cell[i%c] + self.midi_offset
 				measure.append(self.create_note(pitch, self.t_unit))
 		else:
 			measure.append(self.create_note(-1, self.t_measure))

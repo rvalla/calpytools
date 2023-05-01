@@ -233,6 +233,23 @@ class Chain():
 			m += "\n"
 		return m
 
+	#setting up a certain Chain() from a string...
+	def set_chain(self, string_notes):
+		string_links = string_notes.split("-")
+		self.base_data = self.get_base_data(string_links[0] + string_links[1])
+		self.base = self.base_data["ordered"]
+		self.candidates, self.iter_path, self.candidates_size = self.build_candidates_matrix(self.base)
+		self.link_sizes = self.get_link_sizes(len(self.base))
+		self.load_sequence(string_links)
+		self.sequence_size = len(self.sequence)
+		self.check_sequence_status()
+	
+	#loading sequence from a string...
+	def load_sequence(self, string_links):
+		self.sequence = []
+		for l in string_links:
+			self.sequence.append(self.pcs.string_to_notes(l))
+
 	#the class prints itself...
 	def __str__(self):
 		return "-- Hi, I am a notes chain with constant pitch class set." + "\n" + \
