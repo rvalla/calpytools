@@ -21,5 +21,18 @@ looks for each *link* in all the different *states* of the proposed *pitch class
 You can run **chain_cmd.py** to use **Chain()** directly on the console. **Chain()** is also available
 in [musiCal Bot](https://t.me/caltoolsbot).  
 
+## Matrix()
+
+The **Matrix()** class is an implementation of *pitch matrices*. It stores a two dimensional matrix of
+musical notes in which each row and each column fullfill a constant *pitch class set* requirement. The
+class implements different functions to work with a **Matrix()** instance. The class is inspired in
+the matrices proposed by [Robert Morris](https://en.wikipedia.org/wiki/Robert_Morris_(composer)).
+**Matrix()** will be available in [musiCal Bot](https://t.me/caltoolsbot).  
+
+## m21Score()
+
+A **m21Score()** object is a [music21 Score](https://web.mit.edu/music21/) object with some specific
+functions to make other tools here (for example **Matrix()**) sound.  
+
 Feel free to contact me by [mail](mailto:rodrigovalla@protonmail.ch) or reach me in
 [telegram](https://t.me/rvalla) or [mastodon](https://fosstodon.org/@rvalla).
