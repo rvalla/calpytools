@@ -31,7 +31,7 @@ def get_set_info(debug_mode, string_notes):
         print("Ordinal: " + str(o), end="\n")
         print("Interval from C: " + str(interval), end="\n")
         print("Is your set inverted?: " + str(is_inverted), end="\n")
-        print("Is ther a Z related set?: " + str(z_pair), end="\n")
+        print("Is there a Z related set?: " + str(z_pair), end="\n")
         print("How many states this set has?: " + str(states), end="\n")
         print("Ordered form: " + str(ordered), end="\n")
         print("Prime form: " + str(prime), end="\n\n")

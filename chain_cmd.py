@@ -74,6 +74,7 @@ def get_pcs_chain(debug, string_notes, attempts, link_min, link_max, degrading):
             ch.run()
             print("\nAttempt: " + str(i+1), end="\n")
             print("Degrading: " + str(ch.degrading), end="\n")
+            print("Number of links: " + str(ch.sequence_size), end="\n")
             print("Is this sequence healthy?: " + str(ch.check_sequence(ch.base, ch.sequence)), end="\n") #Checking the sequence created...
             print("Is this sequence closed?: " + str(ch.is_closed), end="\n") #Printing sequence status...
             print("Is this sequence closable?: " + str(ch.is_closable), end="\n")

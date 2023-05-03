@@ -109,6 +109,28 @@ class Matrix():
 				row.append([])
 			self.data.append(row)
 		self.build_status()
+	
+	#function to create a random matrix...
+	def random_matrix(self, max_cell, width, height):
+		self.set_size(width, height)
+		self.max_in_cell = 0
+		self.data = []
+		for r in range(self.h):
+			row = []
+			for c in range(self.w):
+				elements = rd.randint(0,max_cell)
+				row.append(self.random_cell(elements))
+				if self.max_in_cell < elements:
+					self.max_in_cell = elements
+			self.data.append(row)
+		self.build_status()
+
+	#creating a random cell...
+	def random_cell(self, elements):
+		notes = []
+		for n in range(elements):
+			notes.append(rd.randint(0, self.mod - 1))
+		return notes
 
 	#function to create a type 1 matrix...
 	def build_type_one(self, notes):
@@ -126,8 +148,8 @@ class Matrix():
 			self.data.append(row)
 		self.build_status()
 	
-	#function to build a matrix by trasposition...
-	def trasposition_cycle(self, string_row, t):
+	#function to build a matrix by translation...
+	def translation_cycle(self, string_row, t):
 		size = self.trasposition_cycle_size(t)
 		first_row = self.get_first_cycle_row(string_row, size)
 		self.set_size(size, size)
