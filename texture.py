@@ -1,4 +1,3 @@
-from music21 import *
 import random as rd
 from score import m21Score
 from matrix import Matrix

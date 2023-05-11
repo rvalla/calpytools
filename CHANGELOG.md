@@ -2,7 +2,14 @@
 
 # Cal py tools: changelog
 
-## 2023-04-22: v.0.1.1 alpha
+## 2023-05-10: v0.2.0 alpha
+
+**Texture()** and **Counterpoint()** are ready to create music now. **Chain()** is
+capable of creating *constant pitch class set notes sequences*.  
+A new *examples* folder stores files that can be useful to start using some of the
+**Calpytools**.  
+
+## 2023-04-22: v0.1.1 alpha
 
 Problems finding *prime forms* were solved. A new script **pcs_cmd.py** is added to run
 pitch class sets analysis directly in console, including a *debug mode*. Several comments

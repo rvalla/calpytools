@@ -149,12 +149,24 @@ class Chain():
 				break
 		return good_sequence
 	
+	#function to move the chain in pitch space...
+	def translation(self, t):
+		for l in range(self.sequence_size):
+			for n in range(len(self.sequence[l])):
+				self.sequence[l][n] = (self.sequence[l][n] + t)%12
+
+	#function to move the matrix in pitch space...
+	def invert(self):
+		for l in range(self.sequence_size):
+			for n in range(len(self.sequence[l])):
+				self.sequence[l][n] = -(self.sequence[l][n])%12
+	
 	#resetting Chain() for a new run...
 	def reset(self):
 		self.sequence_size = 2 #asuming at least the two links from de base pitch set...
 		self.building = True #otherwise we won't create anything...
 		self.is_closed = False #we know a sequence of two links is not closed...
-		self.is_closable = None #the same here...
+		self.is_closable = False #the same here...
 	
 	#building the candidates matrix...
 	def build_candidates_matrix(self, base):
@@ -181,6 +193,7 @@ class Chain():
 		data["cardinality"] = cardinality
 		data["ordinal"] = ordinal
 		data["is_inverted"] = is_inverted
+		data["z_pair"] = z_pair
 		data["states"] = states
 		data["ordered"] = ordered_form
 		data["prime"] = prime_form

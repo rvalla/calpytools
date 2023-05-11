@@ -34,9 +34,13 @@ the matrices proposed by [Robert Morris](https://en.wikipedia.org/wiki/Robert_Mo
 A **m21Score()** object is a [music21 Score](https://web.mit.edu/music21/) object with some specific
 functions to make other tools here (for example **Matrix()**) sound.  
 
-## Texture() and ChainMelody()
+## Texture()
 
-The classes that extends **m21Score()** to create music from a **Matrix()** or **Melody()** instance.  
+The class that extends **m21Score()** to create music from a **Matrix()** instance.  
+
+## Counterpoint()
+
+The class that extends **m21Score()** to create a counterpoint based on different modes.  
 
 Feel free to contact me by [mail](mailto:rodrigovalla@protonmail.ch) or reach me in
 [telegram](https://t.me/rvalla) or [mastodon](https://fosstodon.org/@rvalla).
