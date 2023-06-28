@@ -7,7 +7,7 @@ class Counterpoint(m21Score):
 	"A machine to make a different types of couterpoint"
 
 	#building an instance of a Counterpoint()..
-	def __init__(self, title, composer, key, t_sig, parts, cycles, mode, data, t_unit, t_measure, offs, v_offs):
+	def __init__(self, title, composer, key, t_sig, parts, cycles, mode, markov_path, data, t_unit, t_measure, offs, v_offs):
 		m21Score.__init__(self, title, composer, key, t_sig, parts)
 		self.cycles = cycles #number of cycles...
 		self.mode = mode #texture mode: random, control, markov, conditional, puntual, filled...
@@ -20,7 +20,7 @@ class Counterpoint(m21Score):
 		self.structured_list = None
 		self.markov_last = None
 		self.markov = None
-		self.get_ready(self.mode, data) #only loading variables neede for current mode...
+		self.get_ready(self.mode, data, markov_path) #only loading variables neede for current mode...
 		self.build_counterpoint()
 
 	#building initial counterpoint...
@@ -238,13 +238,13 @@ class Counterpoint(m21Score):
 		return notes
 
 	#loading needed variables for active mode...
-	def get_ready(self, mode, data):
+	def get_ready(self, mode, data, markov_path):
 		if mode == "control":
 			self.control_list = self.get_control_list(data)
 		elif mode == "puntual" or mode == "filled":
 			self.structured_list = self.get_structured_list(data)
 		elif mode == "markov":
-			markovc = js.load(open("data/markov_tonal_table.json"))
+			markovc = js.load(open(markov_path))
 			self.markov = Markovt(markovc)
 			self.markov_last = [self.markov.first_note for p in range(self.parts_count)]
 
