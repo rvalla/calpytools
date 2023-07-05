@@ -43,7 +43,6 @@ class Counterpoint(m21Score):
 		elif self.mode == "mobile":
 			self.add_mobile_cycle()
 		elif self.mode == "markov":
-			#self.markov_last = [self.markov.first_note for n in self.markov_last]
 			self.add_markov_cycle()
 
 	#functions to create random counterpoint...

@@ -64,7 +64,7 @@ class m21Score():
 
 	#saving the score!
 	def save_score(self, output_p, output_n, f):
-		self.score.write(f, output_p + output_n)
+		self.score.write(f, output_p + output_n + "." + f)
 		print("-- Score saved as " + output_n)
 
 	#number of notes in score...
