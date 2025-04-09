@@ -193,6 +193,33 @@ class Matrix():
 			if (n%b == 0):
 				break #We save the minumun which is b multiple too...
 		return n
+	
+	#function to return the pcs in a row...
+	def get_clean_row(self):
+		notes = []
+		for c in range(self.w):
+			for n in self.data[1][c]:
+				if not self.is_in(n, notes):
+					notes.append(n)
+		return notes
+
+	#function to return the pcs in a column...
+	def get_clean_column(self):
+		notes = []
+		for r in range(self.h):
+			for n in self.data[r][1]:
+				if not self.is_in(n, notes):
+					notes.append(n)
+		return notes
+
+	#function to check if an element is already in a list...
+	def is_in(new_note, notes):
+		is_in = False
+		for n in notes:
+			if new_note == n:
+				is_in = True
+				break
+		return is_in
 
 	#printing matrix information...
 	def __str__(self):
