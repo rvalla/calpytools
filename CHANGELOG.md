@@ -1,6 +1,12 @@
-![logo](https://gitlab.com/azarte/azarte.gitlab.io/-/raw/master/public/assets/img/logo_64.png)
+![logo](https://gitlab.com/musicaltools/musicaltools.gitlab.io/-/raw/themoststable/public/assets/img/logo_64.png)
 
 # Cal py tools: changelog
+
+## 2025-04-22: v0.2.5 alpha
+
+**Matrix()** was improved a lot. Now you can start an empty *matrix* and then build
+one by type (type 1, type 2, by translation cycle, from closed chain and random
+methods are available. Implementing the *swap* operation is pending.  
 
 ## 2023-05-10: v0.2.0 alpha
 

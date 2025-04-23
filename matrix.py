@@ -193,6 +193,30 @@ class Matrix():
 			if (n%b == 0):
 				break #We save the minumun which is b multiple too...
 		return n
+
+	#function to build a matrix from a closed chain...
+	def from_closed_chain(self, string_chain):
+		chain = string_chain.split("-")
+		if len(chain)%2 == 1 and len(chain)>4:
+			size = self.from_chain_size(len(chain))
+			self.empty_matrix(size, size)
+			r = 0
+			c = 0
+			for l in range(1, len(chain)-1):
+					self.set_cell((r,c), chain[l])
+					if l%2 == 0:
+						c += 1
+					else:
+						r += 1
+			self.set_cell((0, self.w - 1), chain[0])		
+		else:
+			self.w = None
+			self.h = None
+			self.data = None
+
+	#function to know a matrix from chain size...
+	def from_chain_size(self, links_count):
+		return (links_count - 1)//2
 	
 	#function to return the pcs in a row...
 	def get_clean_row(self):
@@ -224,8 +248,7 @@ class Matrix():
 	#printing matrix information...
 	def __str__(self):
 		return "-- Hi, I am a matrix to make music" + "\n" \
-				+ "-- I have " + str(self.w) + " columns" + "\n" \
-				+ "-- And " + str(self.h) + " rows" + "\n" \
+				+ "-- I have " + str(self.w) + " columns and " + str(self.h) + " rows" + "\n" \
 				+ "-- I think I could sound perfectly." + "\n" \
 				+ "-- My current status is: " + str(self.r_status) + ", " + str(self.c_status)
 

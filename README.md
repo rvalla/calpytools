@@ -2,9 +2,10 @@
 
 # Cal Py Tools
 
-This is a set of tools written in [Python](https://www.python.org) to work with *pitch class sets*, *pitch matrices* and other different ways to control musical discourse. Many tools you find here existed previously in other of
-my projects (sometimes written in other languages). You can find information about all of them in
-[musicaltools.gitlab.io](https://musicaltools.gitlab.io/index_en.html).  
+This is a set of tools written in [Python](https://www.python.org) to work with *pitch class sets*,
+*pitch matrices* and other different ways to control musical discourse. Many tools you find here existed
+previously in other of my projects (sometimes written in other languages). You can find information about
+all of them in [musicaltools.gitlab.io](https://musicaltools.gitlab.io/index_en.html).  
 
 ## PCS()
 
