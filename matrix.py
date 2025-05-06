@@ -12,6 +12,7 @@ class Matrix():
 		self.data = [] #this is the matrix...
 		self.r_status = [] #order of rows...
 		self.c_status = [] #order of columns...
+		self.swap_candidates = None #the place to stores swap candidates...
 		self.build_cells(string_matrix)
 		self.build_status()
 
@@ -29,6 +30,36 @@ class Matrix():
 				for v in range(len(self.data[r][c])):
 					self.data[r][c][v] = -(self.data[r][c][v]) % self.mod
 
+	#function to multiply elements in pitch space...
+	def multiply(self, f):
+		for r in range(self.h):
+			for c in range(self.w):
+				for v in range(len(self.data[r][c])):
+					self.data[r][c][v] = (self.data[r][c][v] * f) % self.mod
+
+	#function to transpose the matrix (inefficient)...
+	def transpose(self):
+		past_h = self.h
+		past_w = self.w
+		self.h = past_w
+		self.w = past_h
+		new_data = []
+		for pr in range(past_w):
+			new_row = []
+			for pc in range(past_h):
+				new_row.append(self.data[pc][pr])
+			new_data.append(new_row)
+		self.data = new_data
+		self.transpose_status()
+
+	#function to rotate the matrix (inefficient)...
+	def rotate(self, direction):
+		self.transpose()
+		if direction > 0:
+			self.r_status = self.r_status[::-1]
+		else:
+			self.c_status = self.c_status[::-1]
+
 	#functions to change matrix status (order of rows and columns)
 	def shuffle_status(self):
 		self.shuffle_rows()
@@ -39,6 +70,12 @@ class Matrix():
 
 	def shuffle_columns(self):
 		rd.shuffle(self.c_status)
+
+	def transpose_status(self):
+		past_r_status = self.r_status
+		past_c_status = self.c_status
+		self.r_status = past_c_status
+		self.c_status = past_r_status
 
 	#function to build the status (order of rows and columns)
 	def build_status(self):
