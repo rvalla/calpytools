@@ -12,19 +12,21 @@ class Matrix():
 		self.data = [] #this is the matrix...
 		self.r_status = [] #order of rows...
 		self.c_status = [] #order of columns...
+		self.swap_degraded = True #to check swap_candidates health...
 		self.swap_candidates = None #the place to stores swap candidates...
 		self.build_cells(string_matrix)
 		self.build_status()
 
 	#function to move the matrix in pitch space...
-	def translation(self, t):
+	def translate(self, t):
+		self.swap_degraded = True
 		for r in range(self.h):
 			for c in range(self.w):
-				for v in range(len(self.data[r][c])):
-					self.data[r][c][v] = (self.data[r][c][v] + t) % self.mod
+				self.data[r][c] = self.translate_notes(self.data[r][c], t)
 
 	#function to move the matrix in pitch space...
 	def invert(self):
+		self.swap_degraded = True
 		for r in range(self.h):
 			for c in range(self.w):
 				for v in range(len(self.data[r][c])):
@@ -32,6 +34,7 @@ class Matrix():
 
 	#function to multiply elements in pitch space...
 	def multiply(self, f):
+		self.swap_degraded = True
 		for r in range(self.h):
 			for c in range(self.w):
 				for v in range(len(self.data[r][c])):
@@ -39,6 +42,7 @@ class Matrix():
 
 	#function to transpose the matrix (inefficient)...
 	def transpose(self):
+		self.swap_degraded = True
 		past_h = self.h
 		past_w = self.w
 		self.h = past_w
@@ -60,7 +64,7 @@ class Matrix():
 		else:
 			self.c_status = self.c_status[::-1]
 
-	#functions to change matrix status (order of rows and columns)
+	#functions to change matrix status (order of rows and columns)...
 	def shuffle_status(self):
 		self.shuffle_rows()
 		self.shuffle_columns()
@@ -73,11 +77,75 @@ class Matrix():
 
 	def transpose_status(self):
 		past_r_status = self.r_status
-		past_c_status = self.c_status
-		self.r_status = past_c_status
+		self.r_status = self.c_status
 		self.c_status = past_r_status
 
-	#function to build the status (order of rows and columns)
+	#functions to make the swap operation...
+	def swap_round(self):
+		self.check_swap_health()
+		swapable_notes = self.get_swapable_notes()
+		for n in swapable_notes:
+			self.swap_note(n)
+				
+	#function to swap a note...
+	def swap_note(self, note):
+		self.check_swap_health()
+		targets = rd.sample(self.swap_candidates[note], 2)
+		self.data[targets[0][0]][targets[0][1]].remove(note)
+		self.data[targets[1][0]][targets[1][1]].remove(note)
+		self.data[targets[0][0]][targets[1][1]].append(note)
+		self.data[targets[1][0]][targets[0][1]].append(note)
+		self.update_swap_candidates(note, targets)
+		if len(self.data[targets[0][0]][targets[1][1]]) > self.max_in_cell or \
+					len(self.data[targets[1][0]][targets[0][1]]) > self.max_in_cell:
+			self.max_in_cell += 1
+		else:
+			self.update_max_in_cell()
+
+	#function to swap a selected note...
+	def swap_note_in_targets(self, note, targets):
+		self.check_swap_health()
+		self.data[self.r_status[targets[0][0]]][self.c_status[targets[0][1]]].remove(note)
+		self.data[self.r_status[targets[1][0]]][self.c_status[targets[1][1]]].remove(note)
+		self.data[self.r_status[targets[0][0]]][self.c_status[targets[1][1]]].append(note)
+		self.data[self.r_status[targets[1][0]]][self.c_status[targets[0][1]]].append(note)
+		self.update_swap_candidates(note, targets)
+		if len(self.data[self.r_status[targets[0][0]]][self.c_status[targets[1][1]]]) > self.max_in_cell or \
+					len(self.data[self.r_status[targets[1][0]]][self.c_status[targets[0][1]]]) > self.max_in_cell:
+			self.max_in_cell += 1
+		else:
+			self.update_max_in_cell()
+
+	#function to build a list of each ocurrence of each note coordinates...
+	def build_swap_candidates(self):
+		self.swap_candidates = [[] for n in range(self.mod)]
+		for r in range(self.h):
+			for c in range(self.w):
+				for v in range(len(self.data[r][c])):
+					self.swap_candidates[self.data[r][c][v]].append((r,c))
+
+	#function to update swap_candidates after a swap...
+	def update_swap_candidates(self, note, targets):
+		self.swap_candidates[note].remove(targets[0])
+		self.swap_candidates[note].remove(targets[1])
+		self.swap_candidates[note].append((targets[0][0], targets[1][1]))
+		self.swap_candidates[note].append((targets[1][0], targets[0][1]))
+
+	#function to get a random order of swapable notes...
+	def get_swapable_notes(self):
+		notes = []
+		for n in range(self.mod):
+			if len(self.swap_candidates[n]) > 1:
+				notes.append(n)
+		return rd.sample(notes, len(notes))
+
+	#function to check swap_candidates health...
+	def check_swap_health(self):
+		if self.swap_degraded:
+			self.build_swap_candidates()
+			self.swap_degraded = False
+
+	#function to build the status (order of rows and columns)...
 	def build_status(self):
 		self.r_status = []
 		self.c_status = []
@@ -88,6 +156,7 @@ class Matrix():
 
 	#function to build the cells of the matrix from a complete string...
 	def build_cells(self, string_matrix):
+		self.swap_degraded = True
 		string_rows = string_matrix.split("/")
 		for r in string_rows:
 			row = []
@@ -130,13 +199,23 @@ class Matrix():
 
 	#function to set a matrix cell...
 	def set_cell(self, position, string_notes):
+		self.swap_degraded = True
 		notes = self.get_notes(string_notes)
 		self.data[position[0]][position[1]] = notes
 		if self.max_in_cell < len(notes):
 			self.max_in_cell = len(notes)
 
+	#function to update max_in_cell...
+	def update_max_in_cell(self):
+		self.max_in_cell = 0
+		for r in range(self.h):
+			for c in range(self.w):
+				if self.max_in_cell < len(self.data[r][c]):
+					self.max_in_cell = len(self.data[r][c])
+
 	#function to create an empty matrix...
 	def empty_matrix(self, width, height):
+		self.swap_degraded = True
 		self.set_size(width, height)
 		self.max_in_cell = 0
 		self.data = []
@@ -149,6 +228,7 @@ class Matrix():
 	
 	#function to create a random matrix...
 	def random_matrix(self, max_cell, width, height):
+		self.swap_degraded = True
 		self.set_size(width, height)
 		self.max_in_cell = 0
 		self.data = []
@@ -175,6 +255,7 @@ class Matrix():
 
 	#function to create a type 2 matrix...
 	def build_type_two(self, notes, other_notes):
+		self.swap_degraded = True
 		self.set_size(len(notes), len(other_notes))
 		self.max_in_cell = 1
 		self.data = []
@@ -187,6 +268,7 @@ class Matrix():
 	
 	#function to build a matrix by translation...
 	def translation_cycle(self, string_row, t):
+		self.swap_degraded = True
 		size = self.trasposition_cycle_size(t)
 		first_row = self.get_first_cycle_row(string_row, size)
 		self.set_size(size, size)
@@ -331,3 +413,38 @@ class Matrix():
 				else:
 					c_text += "   "
 		return c_text
+
+	#to format de matrix as a html table...
+	def matrix_to_html(self):
+		m = "<table>\n"
+		for r in range(self.h):
+			row = "<tr>\n"
+			for c in range(self.w):
+				row += "<td>"
+				for n in self.data[self.r_status[r]][self.c_status[c]]:
+					row += str(n) + " "
+				row += "</td>\n"
+			row += "</tr>\n"
+			m += row
+		m += "</table>\n"
+		return m
+
+	#to format de matrix as a latex tabular...
+	def matrix_to_latex(self):
+		m = "\\begin{tabular}{"
+		for c in range(self.w):
+			m += " c "
+			if c < (self.w - 2):
+				m += "|"
+		m += "}\n"
+		for r in range(self.h):
+			row = ""
+			for c in range(self.w):
+				for n in self.data[self.r_status[r]][self.c_status[c]]:
+					row += str(n) + " "
+				if c < (self.w - 2):
+					row += "&"
+			row += "\\\\ \\hline\n"
+			m += row
+		m += "\\end{tabular}\n"
+		return m

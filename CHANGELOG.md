@@ -2,6 +2,12 @@
 
 # Cal py tools: changelog
 
+## 2025-05-07: v0.3.0 beta
+
+**Matrix()** seems complete now. The *swap* operation is implemented. New
+*transposition*, *scalar multiplication* and *rotations* operations. New
+functions to format the *matrix* as *html* and *latex*.   
+
 ## 2025-04-22: v0.2.5 alpha
 
 **Matrix()** was improved a lot. Now you can start an empty *matrix* and then build
