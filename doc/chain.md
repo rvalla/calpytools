@@ -19,5 +19,46 @@ different states. The program needs to be configured first. You will be aks some
 - limits?: minumum maximum number of links for created chains.
 - fallbacks?: number of times you allow the program to repeat the last link if it doesn't find any other.   
 
+## What can Chain() do?
+
+Here are the functions inside **Chain()** that you may want to call. Internal functions are not listed
+here but you can read the comments in the code (which seems clear to me).  
+
+### __init__(pcs, string_notes, link_min, link_max, max_degrading)
+
+To instance a **Chain()** we need to provide:
+- **pcs**: An instance of **PCS()**
+- **string_notes**: A string of notes (0-11) as **"0 1 3 5 7"**.
+- **link_min**: The desired minimum quantity of links.
+- **link_max**: The desired maximum quantity of links.
+- **max_degrading**: The number of times you can repeat the last link as in ...-**0 1 4**-5 8-**0 1 4**.  
+
+### run()
+
+This function is allways called at the end of **__init__** to build the chain but you can call it whenever you
+want a new note sequence.  
+
+### check_sequence()
+
+You can use this function to confirm each pair of consecutive links add up the same *pitch class set*. This
+is always *True* if you build the sequence with **run()** but not necesarily if you set a custom chain using
+**set_chain(string_notes)** or alter **self.sequence** directly.  
+
+### translate(semitones)
+
+To translate the note sequence in pitch space the desired number of semitones.  
+
+### invert()
+
+To invert the note sequence in pitch space.  
+
+### sequence_to_string()
+
+To get the note sequence as a string.  
+
+### candidates_to_string()
+
+To print the *candidates matrix* which **Chain()** use to buile the note sequence.  
+
 Feel free to contact me by [mail](mailto:rodrigovalla@protonmail.ch) or reach me in
 [telegram](https://t.me/rvalla) or [mastodon](https://fosstodon.org/@rvalla).

@@ -11,7 +11,7 @@ class PCS():
 		cardinality = len(notes)
 		ordered_form = self.ordered_form(notes)
 		interval = ordered_form[0]
-		prime_form = self.move_set(ordered_form, -ordered_form[0])
+		prime_form = self.translate_set(ordered_form, -ordered_form[0])
 		is_inverted, ordinal = self.search_set(cardinality, False, prime_form)
 		if is_inverted:
 			prime_form = self.prime_form(self.invert_set(cardinality, ordered_form))
@@ -61,7 +61,7 @@ class PCS():
 	def prime_form(self, notes):
 		#a prime form is simply an ordered form from 0...
 		ordered_form = self.ordered_form(notes)
-		return self.move_set(ordered_form, -ordered_form[0])
+		return self.translate_set(ordered_form, -ordered_form[0])
 
 	#getting the order form of a notes set...
 	def ordered_form(self, notes):
@@ -159,7 +159,7 @@ class PCS():
 		return vector
 	
 	#getting the trasposition of a set...
-	def move_set(self, notes, interval):
+	def translate_set(self, notes, interval):
 		new_notes = []
 		for n in notes:
 			new_notes.append((n+interval)%12)

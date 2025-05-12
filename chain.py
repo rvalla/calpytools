@@ -150,12 +150,12 @@ class Chain():
 		return good_sequence
 	
 	#function to move the chain in pitch space...
-	def translation(self, t):
+	def translate(self, t):
 		for l in range(self.sequence_size):
 			for n in range(len(self.sequence[l])):
 				self.sequence[l][n] = (self.sequence[l][n] + t)%12
 
-	#function to move the matrix in pitch space...
+	#function to invert the chain in pitch space...
 	def invert(self):
 		for l in range(self.sequence_size):
 			for n in range(len(self.sequence[l])):
