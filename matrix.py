@@ -75,6 +75,20 @@ class Matrix():
 	def shuffle_columns(self):
 		rd.shuffle(self.c_status)
 
+	def set_status(self, new_r_status, new_c_status):
+		self.set_r_status(new_r_status)
+		self.set_c_status(new_c_status)
+
+	def set_r_status(self, new_r_status):
+		for r in range(self.h):
+			new_r_status[r] = self.r_status[new_r_status[r]-1]
+		self.r_status = new_r_status			
+
+	def set_c_status(self, new_c_status):
+		for c in range(self.w):
+			new_c_status[c] = self.c_status[new_c_status[c]-1]
+		self.c_status = new_c_status	
+
 	def transpose_status(self):
 		past_r_status = self.r_status
 		self.r_status = self.c_status
