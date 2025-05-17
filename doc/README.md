@@ -9,6 +9,7 @@ for you in the following files get in touch.
 
 - [**PCS()** and **pcs_cmd.py**](https://gitlab.com/musicaltools/calpytools/-/blob/themoststable/doc/pcs.md)
 - [**Chain()** and **chain_cmd.py**](https://gitlab.com/musicaltools/calpytools/-/blob/themoststable/doc/chain.md)
+- [**Matrix()**](https://gitlab.com/musicaltools/calpytools/-/blob/themoststable/doc/matrix.md)
 
 
 Feel free to contact me by [mail](mailto:rodrigovalla@protonmail.ch) or reach me in
