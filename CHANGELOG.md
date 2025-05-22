@@ -2,6 +2,12 @@
 
 # Cal py tools: changelog
 
+## 2025-05-21: v0.3.1 beta
+
+Errors found in **Matrix()** were solved. Building a *matrix by translation cycle*
+crashed when the user pass an incomplete first row. A new script **matrix_cmd.py**
+allows the user to create and operate matrices directly on a terminal.  
+
 ## 2025-05-07: v0.3.0 beta
 
 **Matrix()** seems complete now. The *swap* operation is implemented. New

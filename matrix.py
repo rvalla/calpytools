@@ -311,8 +311,7 @@ class Matrix():
 		else:
 			difference = size - len(cells_candidate)
 			for i in range(difference):
-				cells_candidate.append([])
-		return cells_candidate
+				cells_candidate.append("")
 
 	#function to know a matrix by trasposition size...
 	def trasposition_cycle_size(self, t):
@@ -370,7 +369,7 @@ class Matrix():
 		return notes
 
 	#function to check if an element is already in a list...
-	def is_in(new_note, notes):
+	def is_in(self, new_note, notes):
 		is_in = False
 		for n in notes:
 			if new_note == n:

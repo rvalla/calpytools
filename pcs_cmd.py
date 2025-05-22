@@ -1,4 +1,3 @@
-
 from pcs import PCS
 
 #A simple script to analyze pitch class sets from the terminal
