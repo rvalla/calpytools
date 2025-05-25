@@ -4,7 +4,7 @@ from markovt import Markovt
 from score import m21Score
 
 class Counterpoint(m21Score):
-	"A machine to make a different types of couterpoint"
+	"A machine to make different types of couterpoints"
 
 	#building an instance of a Counterpoint()..
 	def __init__(self, title, composer, key, t_sig, parts, cycles, mode, markov_path, data, t_unit, t_measure, offs, v_offs):

@@ -177,7 +177,7 @@ class Chain():
 				row.append((n+r)%12) #we save each different state for base pcs...
 			candidates.append(row)
 		if self.base_data["invert_candidates"]: #we extend candidates matrix with inversions when possible...
-			i_base = self.pcs.invert_set(len(base), base)
+			i_base = self.pcs.invert_set(base)
 			for r in range(self.base_data["candidates_size"]):
 				row = []
 				for n in i_base:

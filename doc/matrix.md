@@ -8,6 +8,36 @@ There are two main goals of **Matrix()**. The first one is to make your work wit
 build and operate them and print the results correctly formated in a terminal window. The second one is to
 use them to control *pitch* and create random *musical textures* with **Texture()**.  
 
+## matrix_cmd.py
+
+You can use this tool to work with a **Matrix()** instance in a terminal window. It will print the available
+commands for you but to avoid unnecessary misteries I will enumerate them here. Supossing you run *matrix_cmd.py*
+and typed *n* to create a new empty matrix you can build your matrix typing:
+
+- **type1**: to pass a list of notes separated by spaces ("0 1 4 5") and build a type one matrix (a matrix with
+the same *pitch class set* in all rows and columns.  
+- **type2**: to pass two list of notes separated by a dash ("0 1 4 5-0 1 3") and build a type two matrix (a
+matrix with the first *pitch class set* in all rows and the second one in all columns.  
+- **cycle**: to pass the first row of your matrix separating your cells with a dash ("0 1-2-3 4-5"). Then the program
+will ask for a translation step (the number of semitones to translate your notes for each new row).  
+- **chain**: to pass a *closed chain* with links separated by a dash ("0 1 2-3 4-5 6 7-...-0 1 2").  
+- **random**: to pass *maximum number of elements in a cell*, *width* and *height* separated by spaces (4 4 4) and
+build a random matrix.  
+
+After building your *matrix* you can operate it using the following commands:
+
+- **+n**: to translate all elements in the matrix *n* semitones.
+- **i**: to invert all elements in the matrix.
+- **t**: to transpose your matrix (rows become columns, columns become rows).
+- **xn**: to multiply all elements in the matrix by *n*. Be careful here, only [coprime](https://en.wikipedia.org/wiki/Coprime_integers)
+factors of 12 ensure the cardinality of the *pitch class set* in the matrix is maintained.  
+- **s**: to shuffle the matrix status (reordering rows and columns).
+- *swap a b ... n*: to swap the position of *a b ... n* elements in the matrix. Be careful here too, you
+can only *swap* elements which are at least in two different cells of the matrix.
+- **pcs**: to get the *pitch class set* information for the first row and the first column of the matrix. Most of
+the time the other rows and columns contain the same *pitch class set* but that is not the case if you build a
+random matrix.  
+
 ## What can Matrix() do?
 
 Here are the functions inside **Matrix()** that you may want to call. Internal functions are not listed

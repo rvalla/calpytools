@@ -1,3 +1,4 @@
+#first we add the parent folder to the path to use our tools...
 import sys
 sys.path.append("..")
 

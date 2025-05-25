@@ -44,7 +44,7 @@ def execute_user_input(the_input):
         print("Let's create a type 2 matrix. Please give me two pcs (like '0 1 2 3-0 3 5')", end="\n")
         try:
             sets = input().split("-")
-            the_matrix.build_type_one(the_matrix.get_notes(sets[0]), the_matrix.get_notes(sets[1]))
+            the_matrix.build_type_two(the_matrix.get_notes(sets[0]), the_matrix.get_notes(sets[1]))
             print("", end="\n")
             the_matrix.print_matrix()
         except:
@@ -140,7 +140,7 @@ def execute_user_input(the_input):
 while True:
     a = input()
     try:
-        if a.lower() == "q":
+        if a.lower() == "q" or a.lower() == "exit":
             print("That's all!", end="\n")
             break
         elif a.lower() == "n":
