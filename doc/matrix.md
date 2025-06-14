@@ -133,6 +133,14 @@ To set a new order for rows of the *matrix*.
 
 To set a new order for columns of the *matrix*.  
 
+## get_cell()
+
+To get the notes in a *cell* in random order.  
+
+## get_static_cell()
+
+To get the notes in a *cell* without shuffling its order.  
+
 ## print_matrix()
 
 To print the *matrix* in a terminal window in a clear formated way.  

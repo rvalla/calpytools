@@ -45,7 +45,20 @@ Returns an interval vector of 11 interval classes (considers inverted interval a
 
 ## build_set_info_msg(cardinality, ordinal, interval, is_inverted, z_pair, states, ordered_form, prime_form)
 
-Returns a well formated string with all pcs information.    
+Returns a well formated string with all pcs information.   
+
+## prime_form([int_notes])
+
+Returns the *prime form* for the set you pass as a list of notes represented by integers.  
+
+## ordered_form([int_notes])
+
+Returns the *ordered form* for the set you pass as a list of notes represented by integers.  
+
+## get_states_matrix([int_notes])
+
+Returns a list containing all different states for the set you pass as a list of notes
+represented by integers.  
 
 
 Feel free to contact me by [mail](mailto:rodrigovalla@protonmail.ch) or reach me in

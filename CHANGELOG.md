@@ -2,6 +2,12 @@
 
 # Cal py tools: changelog
 
+## 2025-06-13: v0.3.2 beta
+
+New *get_static_cell()* function to get notes from a cell without shuffling notes,
+*build_matrix_candidates()* in **Chani()** now get all states for the base set calling
+*get_states_matrix()* in **PCS()**. The documentation was updated.  
+
 ## 2025-05-21: v0.3.1 beta
 
 Errors found in **Matrix()** were solved. Building a *matrix by translation cycle*
