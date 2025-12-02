@@ -2,10 +2,17 @@
 
 # Cal py tools: changelog
 
+## 2025-12-02: v0.3.2.1 beta
+
+Correcting a stupid error en **Chain()**. When calling *run()*, *self.degrading* value
+was unchanged. It will be 0 now.  
+Improving *chain_cmd.py* to operate with your **Chain()** (calling *run()*, *translate(n)*
+and *invert()*).  
+
 ## 2025-06-13: v0.3.2 beta
 
-New *get_static_cell()* function to get notes from a cell without shuffling notes,
-*build_matrix_candidates()* in **Chani()** now get all states for the base set calling
+New *get_static_cell()* in **Matrix()** function to get notes from a cell without shuffling notes,
+*build_matrix_candidates()* in **Chain()** now get all states for the base set calling
 *get_states_matrix()* in **PCS()**. The documentation was updated.  
 
 ## 2025-05-21: v0.3.1 beta

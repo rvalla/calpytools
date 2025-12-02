@@ -17,7 +17,13 @@ different states. The program needs to be configured first. You will be aks some
 - *Debug* mode?: yes - no.
 - attempts?: the number of attempts looking for a closed chain.
 - limits?: minumum maximum number of links for created chains.
-- fallbacks?: number of times you allow the program to repeat the last link if it doesn't find any other.   
+- fallbacks?: number of times you allow the program to repeat the last link if it doesn't find any other.  
+
+After creating your first chain you can operate with it typing:
+
+- *n*: to call **Chain()**.*run()* and get a new sequence of notes.
+- *i*: to invert your sequence.
+- *+n*: to translate all elements in the chain *n* semitones.  
 
 ## What can Chain() do?
 
