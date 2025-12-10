@@ -2,7 +2,7 @@
 
 # Cal py tools: changelog
 
-## 2025-12-10: v0.2.2 beta
+## 2025-12-10: v0.3.2.2 beta
 
 Correcting an error in **Chain()**. *Chain.sequence* is a nested list that sometimes
 (in case of a fallback when looking for new links) contained references to other links
