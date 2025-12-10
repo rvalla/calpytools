@@ -2,6 +2,14 @@
 
 # Cal py tools: changelog
 
+## 2025-12-10: v0.2.2 beta
+
+Correcting an error in **Chain()**. *Chain.sequence* is a nested list that sometimes
+(in case of a fallback when looking for new links) contained references to other links
+(sublists) instead of lists of integers. It was solved calling *list.copy()*.  
+New *debugging* folder to save data from stupid error like the one discribed above.  
+**PCS()** now can recieve a *prime_form_path* parameter to load pitch class set data. 
+
 ## 2025-12-02: v0.3.2.1 beta
 
 Correcting a stupid error en **Chain()**. When calling *run()*, *self.degrading* value
