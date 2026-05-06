@@ -2,6 +2,16 @@
 
 # Cal py tools: changelog
 
+## 2026-05-05: v0.3.5.0 beta
+
+New functions *multiply()* and *close()* in **Chain()**. With *multiply()* you
+can multiply the elements in the sequence. This operation only produced a healthy
+*chain* if you multiply by a factor which is relative prime to 12. The *close()*
+function ensures that the first and last links are the same. If *chain.is_closable*
+is **True** the function copies the whole sequence until this condition is met. If
+*chain.is_closable* is **False** the function start copying the sequence backward
+until a link equal to the first link is found.  
+
 ## 2025-12-10: v0.3.2.2 beta
 
 Correcting an error in **Chain()**. *Chain.sequence* is a nested list that sometimes

@@ -66,7 +66,9 @@ print("Waiting for your base pitch set...", end="\n")
 
 print("To operate your chain simply use:", end="\n")
 print("'+n' to translate your chain n steps,", end="\n")
+print("'xn' to multiply the elements of the chain by n,", end="\n")
 print("or 'i' to invert your chain,", end="\n")
+print("or 'c' to close the chain,", end="\n")
 print("or 'n' to build a new chain with the same notes.,", end="\n\n")
 
 print("You can pass a new set of note at any time!", end="\n")
@@ -106,9 +108,18 @@ while True:
                 ch.translate(t)
                 print("\nTranslated " + str(t) + " steps:", end="\n")
                 print(ch.sequence_to_string(ch.sequence), end="\n\n")
+            elif a.startswith("x"):
+                f = int(a[1:])
+                ch.multiply(f)
+                print("\nMultiplied by " + str(f) + ":", end="\n")
+                print(ch.sequence_to_string(ch.sequence), end="\n\n")
             elif a == "i":
                 ch.invert()
                 print("\nInverted:", end="\n")
+                print(ch.sequence_to_string(ch.sequence), end="\n\n")
+            elif a == "c":
+                ch.close()
+                print("\nClosed:", end="\n")
                 print(ch.sequence_to_string(ch.sequence), end="\n\n")
             elif a == "n":
                 ch.run()
