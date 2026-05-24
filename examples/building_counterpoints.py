@@ -25,5 +25,5 @@ name = "counterpoint_mk_r"
 
 for i in range(1):
 	c = Counterpoint(title, composer, key, t_sig, parts, cycles, mode, markov_path, data, t_unit, t_measure, offs, v_offs)
-	filename = name + "_" + str(i)
+	filename = "v0.3.5beta_" + name + "_" + str(i)
 	c.save_score("output/", filename, "xml")
