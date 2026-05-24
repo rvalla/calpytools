@@ -267,6 +267,27 @@ class Matrix():
 			notes.append(rd.randint(0, self.mod - 1))
 		return notes
 
+	#function to create a circular permutations matrix...
+	def build_circular(self, string_row):
+		self.swap_degraded = True
+		first_row = self.circular_first_row(string_row)
+		self.set_size(len(first_row), len(first_row))
+		self.max_in_cell = 1
+		self.data = [first_row]
+		for h in range(1, self.h):
+			row = []
+			for c in range(len(first_row)):
+				row.append(first_row[(c+h)%len(first_row)])
+				if len(row[c]) > self.max_in_cell:
+					self.max_in_cell = len(row[c])
+			self.data.append(row)
+		self.build_status()
+
+	#function to get the first row in a circular permutations matrix...
+	def circular_first_row(self, string_row):
+		cells = string_row.split("-")
+		return [self.get_notes(c) for c in cells]
+
 	#function to create a type 1 matrix...
 	def build_type_one(self, notes):
 		self.build_type_two(notes, notes)
@@ -334,7 +355,7 @@ class Matrix():
 	def from_closed_chain(self, string_chain):
 		chain = string_chain.split("-")
 		if len(chain)%2 == 1 and len(chain)>4:
-			size = self.from_chain_size(len(chain))
+			size = self.matrix_size_from_chain_length(len(chain))
 			self.empty_matrix(size, size)
 			r = 0
 			c = 0
@@ -351,7 +372,7 @@ class Matrix():
 			self.data = None
 
 	#function to know a matrix from chain size...
-	def from_chain_size(self, links_count):
+	def matrix_size_from_chain_length(self, links_count):
 		return (links_count - 1)//2
 	
 	#function to return the pcs in a row...
@@ -391,6 +412,21 @@ class Matrix():
 	#function to print the matrix...
 	def print_matrix(self):
 		print(self.matrix_to_string())
+
+	#getting the matrix in one line string...
+	def matrix_to_line(self):
+		m = ""
+		for r in range(self.h):
+			row = ""
+			for c in range(self.w):
+				cell = ""
+				for n in self.data[self.r_status[r]][self.c_status[c]]:
+					cell += str(n)
+					cell += " " 
+				row += cell[:-1]
+				row += "-"
+			m += row[:-1] + "/"
+		return m[:-1]
 	
 	#formatting the matrix...
 	def matrix_to_string(self):

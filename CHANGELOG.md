@@ -2,6 +2,18 @@
 
 # Cal py tools: changelog
 
+## 2026-05-23: v0.3.5.2 beta
+
+New *build_circular()* function in **Matrix()**.  
+Changing name of *from_chain_size()* (the function in **Matrix()** to get the *matrix* size from
+a *chain*'s length) to *matrix_size_from_chain_length()*.  
+New *circular permutations matrix* was included in *matrix_cmd.py* script.  
+
+## 2026-05-10: v0.3.5.1 beta
+
+Adding *matrix_to_line()* in **Matrix()** to get a correctly formated string
+to initialize the same matrix again in the future.  
+
 ## 2026-05-05: v0.3.5.0 beta
 
 New functions *multiply()* and *close()* in **Chain()**. With *multiply()* you

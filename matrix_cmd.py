@@ -14,6 +14,7 @@ print("Type 'n' to create a new matrix.", end="\n")
 print("Type 'q' to close this program.", end="\n\n")
 
 print("After creating a new matrix you can:", end="\n")
+print("Type 'circular' to create a circular permutations matrix,", end="\n")
 print("Type 'type1' to create a type 1 matrix,", end="\n")
 print("or 'type2' to create a type 2 matrix,", end="\n")
 print("or 'cycle' to create a matrix by translation cycle,", end="\n")
@@ -31,7 +32,16 @@ print("or 'swap n1 n2 n3...' to swap existing notes in your matrix.", end="\n\n"
 print("Type 'pcs' to get the pitch class sets in the first row and column.", end="\n\n")
 
 def execute_user_input(the_input):
-    if the_input == "type1":
+    if the_input == "circular":
+        print("Let's create a circular permutations matrix. Please give me your first row (like '0 1-2 3--5')", end="\n")
+        row = input()
+        try:
+            the_matrix.build_circular(row)
+            print("", end="\n")
+            the_matrix.print_matrix()
+        except:
+            print("Something went wrong! Command aborted!", end="\n")
+    elif the_input == "type1":
         print("Let's create a type 1 matrix. Please give me a pcs (like '0 1 2 3')", end="\n")
         try:
             set = input()
@@ -136,6 +146,8 @@ def execute_user_input(the_input):
         print("First column:", end="\n")
         a,b,c,d,e,f,g,h = tool.get_set_info(column)
         print(tool.build_set_info_msg(a,b,c,d,e,f,g,h))
+    else:
+        print("I didn't do anything. That's niether a command nor an input!", end="\n")
 
 while True:
     a = input()
